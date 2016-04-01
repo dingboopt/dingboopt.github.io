@@ -1,5 +1,0 @@
-= tcp ip 算法
-
-tries
-
-image::https://cloud.githubusercontent.com/assets/18365128/14409018/2e00f24c-ff3d-11e5-8331-f9587b860ce4.png[]

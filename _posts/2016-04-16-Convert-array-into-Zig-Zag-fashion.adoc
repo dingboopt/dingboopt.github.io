@@ -1,0 +1,19 @@
+= Convert array into Zig-Zag fashion
+
+Convert array into Zig-Zag fashion
+Given an array of distinct elements, rearrange the elements of array in zig-zag fashion in O(n) time. The converted array should be in form a < b > c < d > e < f.
+
+Example: 
+Input:  arr[] = {4, 3, 7, 8, 6, 2, 1}
+Output: arr[] = {3, 7, 4, 8, 2, 6, 1}
+
+Input:  arr[] =  {1, 4, 3, 2}
+Output: arr[] =  {1, 4, 2, 3}
+
+Solution1:
+ first sort the array. After sorting, exclude the first element, swap the remaining elements in pairs. (i.e. keep arr[0] as it is, swap arr[1] and arr[2], swap arr[3] and arr[4], and so on). Time complexity is O(nlogn) since we need to sort the array first.
+ 
+Solution2:
+modified one pass of bubble sort: from the second item, swap if necessary. We can prove this can achieve the desired goal.
+code address:
+https://github.com/dingboopt/geeksforgeeks/blob/master/zigzag/zigzag.py

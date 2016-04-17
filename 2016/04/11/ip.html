@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="ip 路由算法" />
-    <meta property="og:description" content="一路由原理   最长匹配路径 二路由数据结构及算法   1. hash map   2. trie 三linux内核route解读   Main lookup mechanism   fn_trie_lookup() is the main lookup function. The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key..." />
+    <meta property="og:description" content="一路由原理 最长匹配路径 二路由数据结构及算法 hash map trie 三linux内核route解读   Main lookup mechanism   fn_trie_lookup() is the main lookup function. The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key segment, until..." />
     <meta property="og:url" content="https://dingboopt.github.io/2016/04/11/ip.html" />
     <meta property="article:published_time" content="2016-04-10T16:00:00.000Z" />
-    <meta property="article:modified_time" content="2016-04-17T14:02:01.124Z" />
+    <meta property="article:modified_time" content="2016-04-17T14:02:40.277Z" />
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="ip 路由算法" />
-    <meta name="twitter:description" content="一路由原理   最长匹配路径 二路由数据结构及算法   1. hash map   2. trie 三linux内核route解读   Main lookup mechanism   fn_trie_lookup() is the main lookup function. The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key..." />
+    <meta name="twitter:description" content="一路由原理 最长匹配路径 二路由数据结构及算法 hash map trie 三linux内核route解读   Main lookup mechanism   fn_trie_lookup() is the main lookup function. The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key segment, until..." />
     <meta name="twitter:url" content="https://dingboopt.github.io/2016/04/11/ip.html" />
     
     <script type="application/ld+json">
@@ -45,8 +45,8 @@
     "headline": "ip 路由算法",
     "url": "https://dingboopt.github.io/2016/04/11/ip.html",
     "datePublished": "2016-04-10T16:00:00.000Z",
-    "dateModified": "2016-04-17T14:02:01.124Z",
-    "description": "一路由原理   最长匹配路径 二路由数据结构及算法   1. hash map   2. trie 三linux内核route解读   Main lookup mechanism   fn_trie_lookup() is the main lookup function. The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key..."
+    "dateModified": "2016-04-17T14:02:40.277Z",
+    "description": "一路由原理 最长匹配路径 二路由数据结构及算法 hash map trie 三linux内核route解读   Main lookup mechanism   fn_trie_lookup() is the main lookup function. The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key segment, until..."
 }
     </script>
 
@@ -79,25 +79,41 @@
 
         <section class="post-content">
             <div class="paragraph">
-<p>一路由原理
-  最长匹配路径</p>
+<p>一路由原理</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>最长匹配路径</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>二路由数据结构及算法
-  1. hash map
-  2. trie</p>
+<p>二路由数据结构及算法</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>hash map</p>
+</li>
+<li>
+<p>trie</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>三linux内核route解读
-  Main lookup mechanism
+<p>三linux内核route解读</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  Main lookup mechanism
   fn_trie_lookup() is the main lookup function.
-The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key segment, until we find a leaf. check_leaf() does the fib_semantic_match in the leaf&#8217;s sorted prefix hlist.
+The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key segment, until we find a leaf. check_leaf() does the fib_semantic_match in the leaf's sorted prefix hlist.
 If we find a match, we are done.
-If we don&#8217;t find a match, we enter prefix matching mode. The prefix length, starting out at the same as the key length, is reduced one step at a time, and we backtrack upwards through the trie trying to find a longest matching prefix. The goal is always to reach a leaf and get a positive result from the fib_semantic_match mechanism.
+If we don't find a match, we enter prefix matching mode. The prefix length, starting out at the same as the key length, is reduced one step at a time, and we backtrack upwards through the trie trying to find a longest matching prefix. The goal is always to reach a leaf and get a positive result from the fib_semantic_match mechanism.
 Inside each tnode, the search for longest matching prefix consists of searching through the child array, chopping off (zeroing) the least significant "1" of the child index until we find a match or the child index consists of nothing but zeros.
-At this point we backtrack (t&#8594;stats.backtrack++) up the trie, continuing to chop off part of the key in order to find the longest matching prefix.
+At this point we backtrack (t-&gt;stats.backtrack++) up the trie, continuing to chop off part of the key in order to find the longest matching prefix.
 At this point we will repeatedly descend subtries to look for a match, and there are some optimizations available that can provide us with "shortcuts" to avoid descending into dead ends. Look for "HL_OPTIMIZE" sections in the code.
-To alleviate any doubts about the correctness of the route selection process, a new netlink operation has been added. Look for NETLINK_FIB_LOOKUP, which gives userland access to fib_lookup().</p>
+To alleviate any doubts about the correctness of the route selection process, a new netlink operation has been added. Look for NETLINK_FIB_LOOKUP, which gives userland access to fib_lookup().</pre>
+</div>
 </div>
         </section>
 

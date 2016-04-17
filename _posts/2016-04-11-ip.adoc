@@ -1,13 +1,17 @@
 = ip 路由算法
 
 一路由原理
+
   最长匹配路径
 
 二路由数据结构及算法
+
   1. hash map
   2. trie
 
 三linux内核route解读
+
+
   Main lookup mechanism
   fn_trie_lookup() is the main lookup function.
 The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key segment, until we find a leaf. check_leaf() does the fib_semantic_match in the leaf's sorted prefix hlist.

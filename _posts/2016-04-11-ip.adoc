@@ -1,7 +1,19 @@
 = ip 路由算法
 
 一路由原理
+  最长匹配路径
 
 二路由数据结构及算法
+  1. hash map
+  2. trie
 
 三linux内核route解读
+  Main lookup mechanism
+  fn_trie_lookup() is the main lookup function.
+The lookup is in its simplest form just like fib_find_node(). We descend the trie, key segment by key segment, until we find a leaf. check_leaf() does the fib_semantic_match in the leaf's sorted prefix hlist.
+If we find a match, we are done.
+If we don't find a match, we enter prefix matching mode. The prefix length, starting out at the same as the key length, is reduced one step at a time, and we backtrack upwards through the trie trying to find a longest matching prefix. The goal is always to reach a leaf and get a positive result from the fib_semantic_match mechanism.
+Inside each tnode, the search for longest matching prefix consists of searching through the child array, chopping off (zeroing) the least significant "1" of the child index until we find a match or the child index consists of nothing but zeros.
+At this point we backtrack (t->stats.backtrack++) up the trie, continuing to chop off part of the key in order to find the longest matching prefix.
+At this point we will repeatedly descend subtries to look for a match, and there are some optimizations available that can provide us with "shortcuts" to avoid descending into dead ends. Look for "HL_OPTIMIZE" sections in the code.
+To alleviate any doubts about the correctness of the route selection process, a new netlink operation has been added. Look for NETLINK_FIB_LOOKUP, which gives userland access to fib_lookup(). 
